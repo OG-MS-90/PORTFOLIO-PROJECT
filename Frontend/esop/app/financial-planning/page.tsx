@@ -103,17 +103,21 @@ export default function FinancialPlanningPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Financial Planning</h1>
+      <div className="container max-w-7xl mx-auto px-4 py-8">
+        <div className="mb-8 max-w-3xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Financial Planning</h1>
+          <p className="text-muted-foreground">Create a personalized investment strategy based on your goals and risk tolerance</p>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Financial Details</CardTitle>
-              <CardDescription>Enter your financial information to generate a personalized plan</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid lg:grid-cols-5 gap-8">
+          <div className="lg:col-span-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>Your Financial Details</CardTitle>
+                <CardDescription>Enter your financial information to generate a personalized plan</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Monthly Income ({currencyMeta.symbol})</label>
@@ -237,8 +241,9 @@ export default function FinancialPlanningPage() {
               </form>
             </CardContent>
           </Card>
+          </div>
 
-          <div>
+          <div className="lg:col-span-2">
             <LiveFinancialPreview
               monthlyIncome={formData.monthlyIncome}
               monthlyExpenses={formData.monthlyExpenses}
