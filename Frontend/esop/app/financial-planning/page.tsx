@@ -103,96 +103,96 @@ export default function FinancialPlanningPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0e]">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-        <div className="mb-2 max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Financial Planning</h1>
-          <p className="text-muted-foreground">Create a personalized investment strategy based on your goals and risk tolerance</p>
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-10">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 text-white">Financial Planning</h1>
+          <p className="text-muted-foreground text-base">Create a personalized investment strategy based on your goals and risk tolerance</p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
-          <div className="lg:col-span-3">
-            <Card>
+        <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
+          <div>
+            <Card className="shadow-xl">
               <CardHeader>
                 <CardTitle>Your Financial Details</CardTitle>
                 <CardDescription>Enter your financial information to generate a personalized plan</CardDescription>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
+              <CardContent className="pt-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Monthly Income ({currencyMeta.symbol})</label>
+                    <label className="block text-sm font-medium mb-2.5">Monthly Income ({currencyMeta.symbol})</label>
                     <input
                       type="number"
                       value={formData.monthlyIncome}
                       onChange={(e) => setFormData({...formData, monthlyIncome: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Monthly Expenses ({currencyMeta.symbol})</label>
+                    <label className="block text-sm font-medium mb-2.5">Monthly Expenses ({currencyMeta.symbol})</label>
                     <input
                       type="number"
                       value={formData.monthlyExpenses}
                       onChange={(e) => setFormData({...formData, monthlyExpenses: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Savings Goal ({currencyMeta.symbol})</label>
+                    <label className="block text-sm font-medium mb-2.5">Savings Goal ({currencyMeta.symbol})</label>
                     <input
                       type="number"
                       value={formData.savingsGoal}
                       onChange={(e) => setFormData({...formData, savingsGoal: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Investment Horizon (years)</label>
+                    <label className="block text-sm font-medium mb-2.5">Investment Horizon (years)</label>
                     <input
                       type="number"
                       value={formData.investmentHorizon}
                       onChange={(e) => setFormData({...formData, investmentHorizon: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Current Age</label>
+                    <label className="block text-sm font-medium mb-2.5">Current Age</label>
                     <input
                       type="number"
                       value={formData.currentAge}
                       onChange={(e) => setFormData({...formData, currentAge: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Retirement Age</label>
+                    <label className="block text-sm font-medium mb-2.5">Retirement Age</label>
                     <input
                       type="number"
                       value={formData.retirementAge}
                       onChange={(e) => setFormData({...formData, retirementAge: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Planning Region</label>
+                  <label className="block text-sm font-medium mb-2.5">Planning Region</label>
                   <select
                     value={formData.planningRegion}
                     onChange={(e) => setFormData({...formData, planningRegion: e.target.value as 'us' | 'india'})}
-                    className="w-full p-2 rounded border bg-background"
+                    className="w-full p-3 rounded-lg border bg-background text-base"
                   >
                     <option value="us">United States</option>
                     <option value="india">India</option>
@@ -200,11 +200,11 @@ export default function FinancialPlanningPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Risk Tolerance</label>
+                  <label className="block text-sm font-medium mb-2.5">Risk Tolerance</label>
                   <select
                     value={formData.riskTolerance}
                     onChange={(e) => setFormData({...formData, riskTolerance: e.target.value as 'low' | 'medium' | 'high'})}
-                    className="w-full p-2 rounded border bg-background"
+                    className="w-full p-3 rounded-lg border bg-background text-base"
                   >
                     <option value="low">Low - Conservative</option>
                     <option value="medium">Medium - Balanced</option>
@@ -212,30 +212,30 @@ export default function FinancialPlanningPage() {
                   </select>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Monthly Contribution ({currencyMeta.symbol})</label>
+                    <label className="block text-sm font-medium mb-2.5">Monthly Contribution ({currencyMeta.symbol})</label>
                     <input
                       type="number"
                       value={formData.monthlyContribution}
                       onChange={(e) => setFormData({...formData, monthlyContribution: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Emergency Fund (months)</label>
+                    <label className="block text-sm font-medium mb-2.5">Emergency Fund (months)</label>
                     <input
                       type="number"
                       value={formData.emergencyFundMonths}
                       onChange={(e) => setFormData({...formData, emergencyFundMonths: Number(e.target.value)})}
-                      className="w-full p-2 rounded border bg-background"
+                      className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full mt-2 py-6 text-base font-semibold" disabled={loading}>
                   {loading ? 'Generating Plan...' : 'Generate Financial Plan'}
                 </Button>
               </form>
@@ -243,7 +243,7 @@ export default function FinancialPlanningPage() {
           </Card>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <LiveFinancialPreview
               monthlyIncome={formData.monthlyIncome}
               monthlyExpenses={formData.monthlyExpenses}
