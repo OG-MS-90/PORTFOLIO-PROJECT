@@ -193,10 +193,10 @@ export function Hero2() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mx-auto max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white md:whitespace-nowrap"
+            className="mx-auto max-w-6xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white px-4"
           >
             Turn your ESOPs into a{' '}
-            <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent" style={{ WebkitTextStroke: '1px white', paintOrder: 'stroke fill' }}>
+            <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent inline-block" style={{ WebkitTextStroke: '1px white', paintOrder: 'stroke fill' }}>
               REAL WEALTH PLAN.
             </span>
           </motion.h1>
