@@ -226,30 +226,75 @@ export default function FinancialPlanningResultsPage() {
   // --- Actions ---
   const handleDownloadPDF = async () => {
     if (!reportRef.current) return;
+
+    // We want ALL tabs (overview, portfolio, esop, growth) in the PDF.
+    // Temporarily mark every tab panel as active/visible while we capture.
+    const container = reportRef.current;
+    const tabPanels = Array.from(
+      container.querySelectorAll('[role="tabpanel"]')
+    ) as HTMLElement[];
+
+    const previousStates = tabPanels.map((panel) => panel.getAttribute('data-state'));
+    const previousDisplays = tabPanels.map((panel) => panel.style.display);
+
+    tabPanels.forEach((panel) => {
+      panel.setAttribute('data-state', 'active');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+      }
+    });
     
     try {
       const canvas = await html2canvas(reportRef.current, {
-        scale: 2,
+        // Use device pixel ratio for sharper text on high-DPI screens
+        scale: typeof window !== 'undefined' && window.devicePixelRatio ? window.devicePixelRatio : 2,
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
       });
-      
+
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
-        format: 'a4'
+        format: 'a4',
       });
-      
-      const imgWidth = 210;
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+      // Add first page
+      let heightLeft = imgHeight;
+      let position = 0;
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add extra pages as needed
+      while (heightLeft > 0) {
+        pdf.addPage();
+        position = heightLeft - imgHeight;
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
       pdf.save(`Wealth_Strategy_${new Date().toISOString().split('T')[0]}.pdf`);
     } catch (err) {
       console.error('PDF Generation failed:', err);
       alert('Failed to generate PDF. Please try again.');
+    } finally {
+      // Restore original tab state so UI behaves normally after export
+      tabPanels.forEach((panel, idx) => {
+        const prevState = previousStates[idx];
+        if (prevState) {
+          panel.setAttribute('data-state', prevState);
+        } else {
+          panel.removeAttribute('data-state');
+        }
+        panel.style.display = previousDisplays[idx] || '';
+      });
     }
   };
 
