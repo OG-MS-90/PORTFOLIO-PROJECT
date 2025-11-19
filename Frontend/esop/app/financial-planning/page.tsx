@@ -102,14 +102,14 @@ export default function FinancialPlanningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8 max-w-3xl mx-auto">
+    <div className="min-h-screen bg-[#0a0a0e]">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+        <div className="mb-2 max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Financial Planning</h1>
           <p className="text-muted-foreground">Create a personalized investment strategy based on your goals and risk tolerance</p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
           <div className="lg:col-span-3">
             <Card>
               <CardHeader>

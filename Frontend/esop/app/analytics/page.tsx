@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { SidebarNav } from '@/components/ui/sidebar-nav'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useUser } from '@/contexts/UserContext'
 import { computeAnalyticsFromDb } from '@/services/analyticsEngine'
@@ -290,10 +289,8 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0e]">
-      <SidebarNav />
-      <div className="flex-1 pl-16 lg:pl-64 transition-all duration-300">
-        <div className="container mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="min-h-screen bg-[#0a0a0e]">
+      <div className="container mx-auto px-4 sm:px-6 py-8 space-y-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
               <BarChart3 className="h-6 w-6 text-amber-500" />
