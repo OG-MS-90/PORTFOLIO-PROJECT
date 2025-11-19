@@ -152,6 +152,17 @@ exports.verifyMfaLogin = async (req, res) => {
  * Get the current authenticated user
  */
 exports.getCurrentUser = (req, res) => {
+  // Debug logging to inspect session/auth state in production
+  try {
+    console.log("=== /auth/user debug ===");
+    console.log("Session ID:", req.session?.id);
+    console.log("Session passport:", req.session?.passport);
+    console.log("isAuthenticated():", req.isAuthenticated?.());
+    console.log("User object:", req.user);
+  } catch (e) {
+    console.error("/auth/user debug logging error:", e);
+  }
+
   if (req.isAuthenticated() && req.user) {
     // Don't send sensitive information
     const { _id, email, name, authProvider, mfaEnabled } = req.user;
