@@ -236,9 +236,14 @@ export default function FinancialPlanningResultsPage() {
 
     const previousStates = tabPanels.map((panel) => panel.getAttribute('data-state'));
     const previousDisplays = tabPanels.map((panel) => panel.style.display);
+    const previousHidden = tabPanels.map((panel) => panel.hasAttribute('hidden'));
 
     tabPanels.forEach((panel) => {
       panel.setAttribute('data-state', 'active');
+      // shadcn TabsContent uses hidden attribute + CSS, so remove it for capture
+      if (panel.hasAttribute('hidden')) {
+        panel.removeAttribute('hidden');
+      }
       if (panel.style.display === 'none') {
         panel.style.display = 'block';
       }
@@ -293,7 +298,14 @@ export default function FinancialPlanningResultsPage() {
         } else {
           panel.removeAttribute('data-state');
         }
+
         panel.style.display = previousDisplays[idx] || '';
+
+        if (previousHidden[idx]) {
+          panel.setAttribute('hidden', '');
+        } else {
+          panel.removeAttribute('hidden');
+        }
       });
     }
   };
