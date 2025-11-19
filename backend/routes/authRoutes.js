@@ -27,18 +27,15 @@ router.get(
     console.log("isAuthenticated():", req.isAuthenticated?.());
     console.log("User:", req.user);
 
-    if (!req.isAuthenticated() && req.user) {
-      req.login(req.user, (err) => {
-        if (err) {
-          console.error("Error in manual req.login (Google):", err);
-        } else {
-          console.log("After manual req.login (Google), session.passport:", req.session?.passport);
-        }
-        res.redirect(`${FRONTEND_URL}/dashboard`);
-      });
-    } else {
+    // Explicitly save the session before redirecting
+    req.session.save((err) => {
+      if (err) {
+        console.error("Error saving session (Google):", err);
+        return res.redirect(`${FRONTEND_URL}/login?error=session`);
+      }
+      console.log("Session saved successfully, redirecting to frontend");
       res.redirect(`${FRONTEND_URL}/dashboard`);
-    }
+    });
   }
 );
 
@@ -60,18 +57,15 @@ router.get(
     console.log("isAuthenticated():", req.isAuthenticated?.());
     console.log("User:", req.user);
 
-    if (!req.isAuthenticated() && req.user) {
-      req.login(req.user, (err) => {
-        if (err) {
-          console.error("Error in manual req.login (GitHub):", err);
-        } else {
-          console.log("After manual req.login (GitHub), session.passport:", req.session?.passport);
-        }
-        res.redirect(`${FRONTEND_URL}/dashboard`);
-      });
-    } else {
+    // Explicitly save the session before redirecting
+    req.session.save((err) => {
+      if (err) {
+        console.error("Error saving session (GitHub):", err);
+        return res.redirect(`${FRONTEND_URL}/login?error=session`);
+      }
+      console.log("Session saved successfully, redirecting to frontend");
       res.redirect(`${FRONTEND_URL}/dashboard`);
-    }
+    });
   }
 );
 
