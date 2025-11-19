@@ -27,11 +27,15 @@ const navigation = [
   { name: 'Financial Planning', href: '/financial-planning', icon: TrendingUp },
 ]
 
-export function SidebarNav() {
+interface SidebarNavProps {
+  collapsed: boolean
+  setCollapsed: (value: boolean) => void
+}
+
+export function SidebarNav({ collapsed, setCollapsed }: SidebarNavProps) {
   const pathname = usePathname()
   const router = useRouter()
   const { user, logout } = useUser()
-  const [collapsed, setCollapsed] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   
   const handleSignOut = async () => {
