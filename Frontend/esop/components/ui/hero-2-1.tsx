@@ -196,10 +196,8 @@ export function Hero2() {
             className="mx-auto max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white md:whitespace-nowrap"
           >
             Turn your ESOPs into a{' '}
-            <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/80 align-middle">
-              <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-                REAL WEALTH PLAN.
-              </span>
+            <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent" style={{ WebkitTextStroke: '1px white', paintOrder: 'stroke fill' }}>
+              REAL WEALTH PLAN.
             </span>
           </motion.h1>
           <motion.p
