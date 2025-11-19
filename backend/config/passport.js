@@ -6,6 +6,11 @@ const User = require("../models/User");
 
 require("dotenv").config();
 
+// Allow overriding callback URLs via environment variables so production
+// deployments behind proxies (like Render) can explicitly use HTTPS URLs.
+const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL || "/auth/google/callback";
+const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL || "/auth/github/callback";
+
 passport.serializeUser((user, done) => {
   done(null, user.id); 
 });
@@ -25,7 +30,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: GOOGLE_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -55,7 +60,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      callbackURL: GITHUB_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
