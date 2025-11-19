@@ -14,10 +14,31 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: `${FRONTEND_URL}/login` }),
-  (req, res) => {
-    // Successful authentication
-    res.redirect(`${FRONTEND_URL}/dashboard`);
+  (req, res, next) => {
+    console.log("=== Google callback start ===");
+    console.log("Session ID before auth:", req.session?.id);
+    next();
+  },
+  passport.authenticate("google", { failureRedirect: `${FRONTEND_URL}/login`, session: true }),
+  (req, res, next) => {
+    console.log("=== Google callback after passport ===");
+    console.log("Session ID:", req.session?.id);
+    console.log("Session passport:", req.session?.passport);
+    console.log("isAuthenticated():", req.isAuthenticated?.());
+    console.log("User:", req.user);
+
+    if (!req.isAuthenticated() && req.user) {
+      req.login(req.user, (err) => {
+        if (err) {
+          console.error("Error in manual req.login (Google):", err);
+        } else {
+          console.log("After manual req.login (Google), session.passport:", req.session?.passport);
+        }
+        res.redirect(`${FRONTEND_URL}/dashboard`);
+      });
+    } else {
+      res.redirect(`${FRONTEND_URL}/dashboard`);
+    }
   }
 );
 
@@ -26,9 +47,31 @@ router.get("/github", passport.authenticate("github", { scope: ["user:email"] })
 
 router.get(
   "/github/callback",
-  passport.authenticate("github", { failureRedirect: `${FRONTEND_URL}/login` }),
-  (req, res) => {
-    res.redirect(`${FRONTEND_URL}/dashboard`);
+  (req, res, next) => {
+    console.log("=== GitHub callback start ===");
+    console.log("Session ID before auth:", req.session?.id);
+    next();
+  },
+  passport.authenticate("github", { failureRedirect: `${FRONTEND_URL}/login`, session: true }),
+  (req, res, next) => {
+    console.log("=== GitHub callback after passport ===");
+    console.log("Session ID:", req.session?.id);
+    console.log("Session passport:", req.session?.passport);
+    console.log("isAuthenticated():", req.isAuthenticated?.());
+    console.log("User:", req.user);
+
+    if (!req.isAuthenticated() && req.user) {
+      req.login(req.user, (err) => {
+        if (err) {
+          console.error("Error in manual req.login (GitHub):", err);
+        } else {
+          console.log("After manual req.login (GitHub), session.passport:", req.session?.passport);
+        }
+        res.redirect(`${FRONTEND_URL}/dashboard`);
+      });
+    } else {
+      res.redirect(`${FRONTEND_URL}/dashboard`);
+    }
   }
 );
 
