@@ -1,22 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { setAuthToken } from "@/lib/authClient";
 
 export default function AuthCallbackPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const token = searchParams.get("token");
+    // Read token from the URL on the client side to avoid Next.js
+    // prerender issues with useSearchParams.
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
     if (token) {
       setAuthToken(token);
       router.replace("/dashboard");
     } else {
       router.replace("/login");
     }
-  }, [router, searchParams]);
+  }, [router]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
