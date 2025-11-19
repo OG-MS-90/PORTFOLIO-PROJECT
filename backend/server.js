@@ -23,6 +23,10 @@ connectDB();
 // 2) Initialize App
 const app = express();
 
+// Trust the first proxy (Render/Vercel, etc.) so secure cookies and req.secure
+// are handled correctly when the app is behind an HTTPS proxy.
+app.set('trust proxy', 1);
+
 // 3) Security Middlewares
 app.use(securityHeaders);
 app.use(generalLimiter);
