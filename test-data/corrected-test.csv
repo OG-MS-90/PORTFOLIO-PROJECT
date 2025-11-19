@@ -1,0 +1,5 @@
+ticker,company,grantDate,vestingStartDate,vestingEndDate,quantity,vested,strikePrice,exercisePrice,currentPrice,status,type,notes
+AAPL,Apple Inc.,2022-03-15,2022-03-15,2026-03-15,1000,0,150,150,228.50,Unvested,RSU,4-year vesting schedule
+MSFT,Microsoft Corp.,2021-06-01,2021-06-01,2025-06-01,500,500,220,220,415.75,Vested,Stock Option,Fully vested - in the money
+GOOG,Alphabet Inc.,2023-01-10,2023-01-10,2027-01-10,200,0,1800,1800,142.30,Unvested,Stock Option,Underwater - current price below strike
+AMZN,Amazon.com Inc.,2020-05-15,2020-05-15,2024-05-15,300,300,2100,2100,185.20,Exercised,Stock Option,Exercised but not sold yet

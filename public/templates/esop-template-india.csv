@@ -1,0 +1,7 @@
+ticker,company,grantDate,vestingStartDate,vestingEndDate,quantity,vested,strikePrice,exercisePrice,currentPrice,status,type,salePrice,saleDate,notes
+TCS.NS,Tata Consultancy Services,2021-04-01,2021-04-01,2025-04-01,500,500,3200,3200,3850,Vested,Stock Option,,,Fully vested - in the money
+INFY.NS,Infosys Limited,2020-01-15,2020-01-15,2024-01-15,1000,1000,1200,1200,1580,Exercised,Stock Option,,,Exercised but not sold yet
+HDFCBANK.NS,HDFC Bank Limited,2022-06-01,2022-06-01,2026-06-01,300,150,1500,1500,1680,Vested,Stock Option,,,50% vested - profitable
+RELIANCE.NS,Reliance Industries,2023-03-15,2023-03-15,2027-03-15,200,0,2800,2800,2850,Unvested,RSU,,,Not vested yet
+WIPRO.NS,Wipro Limited,2019-09-01,2019-09-01,2023-09-01,800,800,380,380,450,Sold,Stock Option,475,2024-03-15,Sold for profit
+ITC.NS,ITC Limited,2021-11-10,2021-11-10,2025-11-10,1500,750,420,420,465,Vested,Stock Option,,,50% vested - in the money

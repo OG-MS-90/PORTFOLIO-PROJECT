@@ -1,0 +1,3 @@
+employeeId,grantDate,exercisePrice,vestingSchedule,expirationDate,totalGrants,vested,unvested,exercised,ticker,companyName
+E001,2021-01-15,10.5,4-year with 1-year cliff,2031-01-15,1000,250,750,0,GOOGL,Alphabet Inc.
+E002,2022-03-20,12.75,Monthly vesting over 3 years,2032-03-20,500,150,350,50,MSFT,Microsoft Corporation

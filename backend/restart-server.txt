@@ -1,0 +1,11 @@
+# Instructions to restart the server
+
+1. If you're on Windows, press Ctrl+C in the terminal where your Node.js server is running
+2. If that doesn't work, open Task Manager and end any node.exe processes
+3. Then run the following command to start the server again:
+
+```
+npm start
+```
+
+After restarting, the server should work with the new fixes.

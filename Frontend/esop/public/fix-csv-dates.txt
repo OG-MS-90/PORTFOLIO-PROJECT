@@ -1,0 +1,24 @@
+CSV FORMAT REQUIREMENTS FOR ESOP MANAGEMENT SYSTEM
+
+The system requires proper date formatting in your CSV files.
+
+ISSUE OBSERVED:
+In your current CSV file, dates are showing as "#########" which prevents proper processing.
+
+REQUIRED DATE FORMAT:
+All dates must be in YYYY-MM-DD format (e.g., 2023-05-15)
+
+EXAMPLE OF CORRECTLY FORMATTED CSV:
+ticker,company,grantDate,vestingStartDate,vestingEndDate,quantity,strikePrice,status
+AAPL,Apple Inc.,2022-03-15,2022-03-15,2026-03-15,1000,150,Unvested
+MSFT,Microsoft Corp.,2021-06-01,2021-06-01,2025-06-01,500,220,Vested
+GOOG,Alphabet Inc.,2023-01-10,2023-01-10,2027-01-10,200,1800,Unvested
+AMZN,Amazon.com Inc.,2020-05-15,2020-05-15,2024-05-15,300,2100,Exercised
+
+SOLUTION:
+1. Download the CSV template from the upload page
+2. Open the template in Excel or any text editor
+3. Copy your data into the template, ensuring dates are in YYYY-MM-DD format
+4. Save and upload the corrected file
+
+This will ensure your data appears correctly in the dashboard.

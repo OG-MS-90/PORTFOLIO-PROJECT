@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 2%;
+    --foreground: 48 96% 92%;
+    --card: 210 40% 4%;
+    --card-foreground: 48 96% 92%;
+    --popover: 210 40% 4%;
+    --popover-foreground: 48 96% 92%;
+    --primary: 43 74% 66%;
+    --primary-foreground: 43 5% 10%;
+    --secondary: 210 18% 12%;
+    --secondary-foreground: 48 96% 92%;
+    --muted: 210 20% 12%;
+    --muted-foreground: 45 15% 70%;
+    --accent: 48 96% 45%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 70% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 210 20% 18%;
+    --input: 210 20% 18%;
+    --ring: 48 96% 53%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground) / 0.5);
+}
+
+/* Animated Glow Card Styles */
+.card-canvas {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.card-backdrop {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(192, 192, 192, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  filter: url(#unopaq);
+}
+
+.card-canvas:hover .card-backdrop {
+  opacity: 1;
+}
+
+.glow-card {
+  position: relative;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.border-element {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(192, 192, 192, 0.8),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow-card:hover .border-element {
+  opacity: 1;
+}
+
+.border-left,
+.border-right {
+  width: 2px;
+  height: 100%;
+  top: 0;
+}
+
+.border-left {
+  left: 0;
+  animation: border-flow-vertical 3s linear infinite;
+}
+
+.border-right {
+  right: 0;
+  animation: border-flow-vertical 3s linear infinite reverse;
+}
+
+.border-top,
+.border-bottom {
+  height: 2px;
+  width: 100%;
+  left: 0;
+}
+
+.border-top {
+  top: 0;
+  animation: border-flow-horizontal 3s linear infinite;
+}
+
+.border-bottom {
+  bottom: 0;
+  animation: border-flow-horizontal 3s linear infinite reverse;
+}
+
+@keyframes border-flow-vertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes border-flow-horizontal {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Moving Dot Card Animation */
+@keyframes moveDot {
+  0%, 100% {
+    top: 10%;
+    right: 10%;
+  }
+  25% {
+    top: 10%;
+    right: calc(100% - 35px);
+  }
+  50% {
+    top: calc(100% - 30px);
+    right: calc(100% - 35px);
+  }
+  75% {
+    top: calc(100% - 30px);
+    right: 10%;
+  }
+}
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.loader-letter {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+  animation: loader-letter-anim 1.6s ease-in-out infinite;
+}
+
+.loader-letter:nth-child(1) { animation-delay: 0s; }
+.loader-letter:nth-child(2) { animation-delay: 0.08s; }
+.loader-letter:nth-child(3) { animation-delay: 0.16s; }
+.loader-letter:nth-child(4) { animation-delay: 0.24s; }
+.loader-letter:nth-child(5) { animation-delay: 0.32s; }
+.loader-letter:nth-child(6) { animation-delay: 0.40s; }
+.loader-letter:nth-child(7) { animation-delay: 0.48s; }
+.loader-letter:nth-child(8) { animation-delay: 0.56s; }
+.loader-letter:nth-child(9) { animation-delay: 0.64s; }
+.loader-letter:nth-child(10) { animation-delay: 0.72s; }
+
+.loader {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 20px 0 #fff inset,
+    0 20px 30px 0 #ad5fff inset,
+    0 60px 60px 0 #471eec inset;
+  animation: loader-rotate 2s linear infinite;
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(90deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 30px 0 #ad5fff inset,
+      0 60px 60px 0 #471eec inset;
+  }
+  50% {
+    transform: rotate(270deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 10px 0 #d60a47 inset,
+      0 40px 60px 0 #311e80 inset;
+  }
+  100% {
+    transform: rotate(450deg);
+    box-shadow: 0 10px 20px 0 #fff inset,
+      0 20px 30px 0 #ad5fff inset,
+      0 60px 60px 0 #471eec inset;
+  }
+}
+
+@keyframes loader-letter-anim {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  40% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}

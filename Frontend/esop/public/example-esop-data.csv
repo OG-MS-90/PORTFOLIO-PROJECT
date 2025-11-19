@@ -1,0 +1,5 @@
+ticker,company,grantDate,vestingStartDate,vestingEndDate,quantity,strikePrice,status
+AAPL,Apple Inc.,2022-03-15,2022-03-15,2026-03-15,1000,150,Unvested
+MSFT,Microsoft Corp.,2021-06-01,2021-06-01,2025-06-01,500,220,Vested
+GOOG,Alphabet Inc.,2023-01-10,2023-01-10,2027-01-10,200,1800,Unvested
+AMZN,Amazon.com Inc.,2020-05-15,2020-05-15,2024-05-15,300,2100,Exercised
