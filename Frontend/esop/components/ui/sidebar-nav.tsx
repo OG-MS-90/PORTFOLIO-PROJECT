@@ -44,7 +44,7 @@ export function SidebarNav() {
     <>
       <div 
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen border-r border-neutral-800 bg-[#020308] transition-all duration-300",
+          "fixed left-0 top-0 z-40 min-h-screen h-full border-r border-neutral-800 bg-[#020308] transition-all duration-300 flex flex-col",
           collapsed ? "w-16" : "w-64"
         )}
       >
@@ -75,7 +75,7 @@ export function SidebarNav() {
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-1 p-3">
+        <nav className="flex-1 space-y-1 p-3 overflow-y-auto">
           {navigation.map((item) => {
             const isActive = pathname === item.href
             const Icon = item.icon
@@ -107,7 +107,7 @@ export function SidebarNav() {
 
         {/* User Profile Section */}
         <div className={cn(
-          "absolute bottom-0 left-0 right-0 border-t border-neutral-800 bg-[#020308]",
+          "flex-shrink-0 border-t border-neutral-800 bg-[#020308]",
           collapsed ? "p-2" : "p-4"
         )}>
           {collapsed ? (

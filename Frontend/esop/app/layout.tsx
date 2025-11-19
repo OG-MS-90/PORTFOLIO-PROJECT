@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { UserProvider } from '@/contexts/UserContext'
 import { EsopDataProvider } from '@/contexts/EsopDataContext'
+import { LayoutWrapper } from '@/components/LayoutWrapper'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <UserProvider>
           <EsopDataProvider>
-            {children}
+            <LayoutWrapper>
+              {children}
+            </LayoutWrapper>
           </EsopDataProvider>
         </UserProvider>
       </body>

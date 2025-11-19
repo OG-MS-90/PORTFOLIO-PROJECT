@@ -7,8 +7,11 @@ import { TestimonialsSection as MarqueeTestimonialsSection } from '@/components/
 import { Hero2 } from '@/components/ui/hero-2-1'
 import { GlowingEffect } from '@/components/ui/glowing-effect'
 import { ArrowRight, TrendingUp, Upload, BarChart3, Github, Twitter, Linkedin, Mail } from 'lucide-react'
+import { useUser } from '@/contexts/UserContext'
 
 export default function HomePage() {
+  const { user, loading } = useUser()
+  
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-background via-background to-background">
       {/* Bottom left gradient glow */}
@@ -50,9 +53,9 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href="/login">
+                  <Link href={user ? "/esop-upload" : "/login"}>
                     <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      Sign in to upload
+                      {user ? "Go to Upload" : "Sign in to upload"}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
                   </Link>
@@ -81,9 +84,9 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href="/login">
+                  <Link href={user ? "/analytics" : "/login"}>
                     <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      Sign in to view analytics
+                      {user ? "Go to Analytics" : "Sign in to view analytics"}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
                   </Link>
@@ -112,9 +115,9 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href="/login">
+                  <Link href={user ? "/financial-planning" : "/login"}>
                     <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      Sign in to start planning
+                      {user ? "Go to Planning" : "Sign in to start planning"}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
                   </Link>
