@@ -259,21 +259,14 @@ export default function HomePage() {
                 </p>
                 <div className="flex gap-3">
                   <Link
-                    href="https://twitter.com"
-                    target="_blank"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
-                  >
-                    <Twitter className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="https://github.com"
+                    href="https://github.com/OG-MS-90"
                     target="_blank"
                     className="flex h-9 w-9 items-center justify-center rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
                   >
                     <Github className="h-4 w-4" />
                   </Link>
                   <Link
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/mrunal-sanghi"
                     target="_blank"
                     className="flex h-9 w-9 items-center justify-center rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
                   >
