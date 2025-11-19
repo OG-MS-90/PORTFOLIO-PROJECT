@@ -4,19 +4,15 @@ import { usePathname } from 'next/navigation'
 import { SidebarNav } from '@/components/ui/sidebar-nav'
 import { useUser } from '@/contexts/UserContext'
 
-const publicRoutes = ['/', '/login', '/signup']
+// Routes where sidebar should never appear
+const routesWithoutSidebar = ['/', '/login', '/signup', '/auth/callback']
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const { user, loading } = useUser()
+  const { user } = useUser()
   
-  // Don't show sidebar on public routes if user is not logged in
-  const showSidebar = user && !publicRoutes.includes(pathname)
-  
-  // Also show sidebar on home page if user is logged in
-  const showSidebarOnHome = user && pathname === '/'
-  
-  const shouldShowSidebar = showSidebar || showSidebarOnHome
+  // Show sidebar only on protected routes (user logged in + not in excluded routes)
+  const shouldShowSidebar = user && !routesWithoutSidebar.includes(pathname)
   
   return (
     <>
