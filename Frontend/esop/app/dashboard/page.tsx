@@ -327,8 +327,7 @@ export default function DashboardPage() {
                       {shareDistributionData.map((entry, index) => (
                         <Cell 
                           key={`cell-${index}`} 
-                          fill="#f59e0b"
-                          opacity={index === 0 ? 1 : 0.7}
+                          fill={entry.color}
                           strokeWidth={0}
                         />
                       ))}
