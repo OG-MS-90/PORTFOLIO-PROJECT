@@ -181,8 +181,8 @@ export default function HomePage() {
                 In a few steps, you get from scattered grant letters to a clear, actionable plan.
               </p>
             </div>
-            <div className="grid gap-8 sm:grid-cols-3">
-              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/50 bg-gradient-to-br from-gray-900/30 to-gray-950/50 p-6 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-300 hover:border-amber-900/30 hover:shadow-xl hover:shadow-amber-950/10">
+            <div className="grid gap-8 sm:grid-cols-3 auto-rows-fr">
+              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/50 bg-gradient-to-br from-gray-900/30 to-gray-950/50 p-6 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-300 hover:border-amber-900/30 hover:shadow-xl hover:shadow-amber-950/10 flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-950/[0.02] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative flex items-center justify-between">
                   <div className="inline-flex items-center gap-3">
@@ -194,11 +194,11 @@ export default function HomePage() {
                   <ArrowRight className="h-5 w-5 text-amber-700/60 transition-all duration-300 group-hover:translate-x-1 group-hover:text-amber-500" />
                 </div>
                 <h4 className="relative text-lg font-semibold tracking-tight text-gray-100">Upload your ESOPs</h4>
-                <p className="relative text-sm leading-relaxed text-gray-500">
+                <p className="relative text-sm leading-relaxed text-gray-500 flex-1">
                   Drop in a CSV with your grants, tickers, quantities, and vesting dates.
                 </p>
               </div>
-              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/50 bg-gradient-to-br from-gray-900/30 to-gray-950/50 p-6 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-300 hover:border-amber-900/30 hover:shadow-xl hover:shadow-amber-950/10">
+              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/50 bg-gradient-to-br from-gray-900/30 to-gray-950/50 p-6 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-300 hover:border-amber-900/30 hover:shadow-xl hover:shadow-amber-950/10 flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-950/[0.02] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative flex items-center justify-between">
                   <div className="inline-flex items-center gap-3">
@@ -210,11 +210,11 @@ export default function HomePage() {
                   <ArrowRight className="h-5 w-5 text-amber-700/60 transition-all duration-300 group-hover:translate-x-1 group-hover:text-amber-500" />
                 </div>
                 <h4 className="relative text-lg font-semibold tracking-tight text-gray-100">Explore analytics</h4>
-                <p className="relative text-sm leading-relaxed text-gray-500">
+                <p className="relative text-sm leading-relaxed text-gray-500 flex-1">
                   See what's vested, what's pending, and what it's worth at today's prices.
                 </p>
               </div>
-              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/70 bg-gradient-to-br from-gray-950/80 to-gray-900/80 p-6 shadow-lg shadow-black/20 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
+              <div className="group relative overflow-hidden space-y-3 rounded-xl border border-gray-800/70 bg-gradient-to-br from-gray-950/80 to-gray-900/80 p-6 shadow-lg shadow-black/20 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative flex items-center justify-between">
                   <div className="inline-flex items-center gap-3">
@@ -226,7 +226,7 @@ export default function HomePage() {
                   <ArrowRight className="h-5 w-5 text-primary/70 transition-all group-hover:translate-x-1 group-hover:text-primary" />
                 </div>
                 <h4 className="relative text-lg font-semibold tracking-tight text-gray-100">Generate a plan</h4>
-                <p className="relative text-sm leading-relaxed text-gray-500">
+                <p className="relative text-sm leading-relaxed text-gray-500 flex-1">
                   Use the financial planner to simulate exercises, taxes, and reinvestment.
                 </p>
               </div>
@@ -276,10 +276,17 @@ export default function HomePage() {
 
               {/* Product */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold">Product</h3>
+                <h3 className="text-sm font-semibold flex items-center gap-2">📦 Product</h3>
                 <ul className="space-y-3 text-sm">
                   <li>
-                    <a href="#product" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <a 
+                      href="#product" 
+                      onClick={(e) => {
+                        e.preventDefault()
+                        document.querySelector('#product')?.scrollIntoView({ behavior: 'smooth' })
+                      }}
+                      className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
                       Features
                     </a>
                   </li>
@@ -303,15 +310,29 @@ export default function HomePage() {
 
               {/* Resources */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold">Resources</h3>
+                <h3 className="text-sm font-semibold flex items-center gap-2">📚 Resources</h3>
                 <ul className="space-y-3 text-sm">
                   <li>
-                    <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <a 
+                      href="#how-it-works" 
+                      onClick={(e) => {
+                        e.preventDefault()
+                        document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' })
+                      }}
+                      className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
                       How it works
                     </a>
                   </li>
                   <li>
-                    <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <a 
+                      href="#testimonials" 
+                      onClick={(e) => {
+                        e.preventDefault()
+                        document.querySelector('#testimonials')?.scrollIntoView({ behavior: 'smooth' })
+                      }}
+                      className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
                       Testimonials
                     </a>
                   </li>
@@ -330,7 +351,7 @@ export default function HomePage() {
 
               {/* Legal & Contact */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold">Legal</h3>
+                <h3 className="text-sm font-semibold flex items-center gap-2">⚖️ Legal</h3>
                 <ul className="space-y-3 text-sm">
                   <li>
                     <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">

@@ -73,13 +73,34 @@ export function Hero2() {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#product" className="text-sm text-gray-300 transition-colors hover:text-white">
+            <a 
+              href="#product" 
+              className="text-sm text-gray-300 transition-colors hover:text-white cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                document.querySelector('#product')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               Product
             </a>
-            <a href="#how-it-works" className="text-sm text-gray-300 transition-colors hover:text-white">
+            <a 
+              href="#how-it-works" 
+              className="text-sm text-gray-300 transition-colors hover:text-white cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               How it works
             </a>
-            <a href="#testimonials" className="text-sm text-gray-300 transition-colors hover:text-white">
+            <a 
+              href="#testimonials" 
+              className="text-sm text-gray-300 transition-colors hover:text-white cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                document.querySelector('#testimonials')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               Testimonials
             </a>
             <Link
@@ -154,6 +175,10 @@ export function Hero2() {
         {/* Badge */}
         <a
           href="#product"
+          onClick={(e) => {
+            e.preventDefault()
+            document.querySelector('#product')?.scrollIntoView({ behavior: 'smooth' })
+          }}
           className="mx-auto mt-8 flex max-w-fit cursor-pointer items-center justify-center space-x-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105"
         >
           <span className="text-sm font-medium text-white">
@@ -170,10 +195,7 @@ export function Hero2() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="mx-auto max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
           >
-            Turn your ESOPs into a{' '}
-            <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-              real wealth plan.
-            </span>
+            Turn your ESOPs into a <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent">REAL WEALTH PLAN.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -200,6 +222,10 @@ export function Hero2() {
             </Link>
             <a
               href="#how-it-works"
+              onClick={(e) => {
+                e.preventDefault()
+                document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' })
+              }}
               className="flex h-12 items-center rounded-full border border-gray-600 px-8 text-base font-medium text-white transition-all hover:scale-105 hover:bg-white/10"
             >
               Learn how it works
