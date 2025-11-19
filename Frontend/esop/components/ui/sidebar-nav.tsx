@@ -21,7 +21,6 @@ import { Button } from './button'
 import { useUser } from '@/contexts/UserContext'
 
 const navigation = [
-  { name: 'Home', href: '/', icon: Home },
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Upload ESOP', href: '/esop-upload', icon: Upload },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
@@ -44,7 +43,7 @@ export function SidebarNav() {
     <>
       <div 
         className={cn(
-          "fixed left-0 top-0 z-40 min-h-screen h-full border-r border-neutral-800 bg-[#020308] transition-all duration-300 flex flex-col",
+          "fixed left-0 top-0 z-40 min-h-screen h-full border-r border-neutral-800 bg-[#020308] transition-all duration-300 flex flex-col hidden md:flex",
           collapsed ? "w-16" : "w-64"
         )}
       >

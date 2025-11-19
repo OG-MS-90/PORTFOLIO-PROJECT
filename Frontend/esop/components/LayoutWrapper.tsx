@@ -17,7 +17,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       {shouldShowSidebar && <SidebarNav />}
-      <div className={shouldShowSidebar ? 'ml-64' : ''}>
+      <div className={shouldShowSidebar ? 'md:ml-64' : ''}>
         {children}
       </div>
     </>

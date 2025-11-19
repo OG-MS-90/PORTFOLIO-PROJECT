@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { TestimonialsSection as MarqueeTestimonialsSection } from '@/components/ui/testimonials-with-marquee'
@@ -10,6 +11,7 @@ import { ArrowRight, TrendingUp, Upload, BarChart3, Github, Twitter, Linkedin, M
 import { useUser } from '@/contexts/UserContext'
 
 export default function HomePage() {
+  const router = useRouter()
   const { user, loading } = useUser()
   
   return (
@@ -53,12 +55,14 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href={user ? "/esop-upload" : "/login"}>
-                    <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      {user ? "Go to Upload" : "Sign in to upload"}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500"
+                    onClick={() => router.push(user ? "/esop-upload" : "/login")}
+                  >
+                    {user ? "Go to Upload" : "Sign in to upload"}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -84,12 +88,14 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href={user ? "/analytics" : "/login"}>
-                    <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      {user ? "Go to Analytics" : "Sign in to view analytics"}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500"
+                    onClick={() => router.push(user ? "/analytics" : "/login")}
+                  >
+                    {user ? "Go to Analytics" : "Sign in to view analytics"}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -115,12 +121,14 @@ export default function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <Link href={user ? "/financial-planning" : "/login"}>
-                    <Button variant="ghost" className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500">
-                      {user ? "Go to Planning" : "Sign in to start planning"}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    className="group/btn w-full justify-between text-sm font-medium text-gray-400 transition-all hover:bg-amber-950/10 hover:text-amber-500"
+                    onClick={() => router.push(user ? "/financial-planning" : "/login")}
+                  >
+                    {user ? "Go to Planning" : "Sign in to start planning"}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -241,8 +249,8 @@ export default function HomePage() {
               {/* Brand */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
-                    EMS
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-black">
+                    <span className="text-xs font-bold">EMS</span>
                   </div>
                   <span className="text-sm font-semibold">ESOP MANAGEMENT SYSTEM</span>
                 </div>
