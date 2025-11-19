@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
 import { EsopRecord } from '@/types/esop'
+import { authorizedFetch } from '@/lib/authClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
@@ -30,8 +31,7 @@ export function EsopDataProvider({ children }: { children: ReactNode }) {
     
     try {
       const cacheBuster = bypassCache ? `?_t=${Date.now()}` : ''
-      const response = await fetch(`${API_BASE_URL}/csv/data${cacheBuster}`, { 
-        credentials: 'include',
+      const response = await authorizedFetch(`${API_BASE_URL}/csv/data${cacheBuster}`, { 
         headers: {
           'Accept': 'application/json',
           'Cache-Control': bypassCache ? 'no-cache, no-store' : ''

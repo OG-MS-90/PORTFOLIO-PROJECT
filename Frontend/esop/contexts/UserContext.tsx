@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+import { authorizedFetch, clearAuthToken } from '@/lib/authClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
@@ -30,7 +31,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/auth/user`, { credentials: 'include' })
+        const response = await authorizedFetch(`${API_BASE_URL}/auth/user`)
         if (response.ok) {
           const userData = await response.json()
           login(userData)
@@ -53,6 +54,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = () => {
+    clearAuthToken()
     setUser(null)
   }
 

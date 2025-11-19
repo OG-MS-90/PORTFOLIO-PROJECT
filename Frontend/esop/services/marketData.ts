@@ -1,12 +1,11 @@
 import { StockData } from '@/types/esop'
+import { authorizedFetch } from '@/lib/authClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
 export async function getStockQuote(ticker: string): Promise<StockData | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/stock/${ticker}`, {
-      credentials: 'include',
-    })
+    const response = await authorizedFetch(`${API_BASE_URL}/stock/${ticker}`)
 
     if (!response.ok) {
       console.error(`Failed to fetch stock data for ${ticker}`)

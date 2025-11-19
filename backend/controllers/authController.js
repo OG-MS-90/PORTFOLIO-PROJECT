@@ -163,9 +163,10 @@ exports.getCurrentUser = (req, res) => {
     console.error("/auth/user debug logging error:", e);
   }
 
-  if (req.isAuthenticated() && req.user) {
+  if (req.user) {
     // Don't send sensitive information
     const { _id, email, name, authProvider, mfaEnabled } = req.user;
+
     res.json({
       id: _id,
       email,

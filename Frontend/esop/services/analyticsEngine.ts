@@ -12,6 +12,7 @@ import {
   isErrorResponse,
   isAnalyticsResponse
 } from '@/types/analytics';
+import { authorizedFetch } from '@/lib/authClient';
 
 // API base URL - falls back to local backend on port 4000
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
@@ -26,10 +27,9 @@ export async function computeAnalyticsFromCsv(file: File): Promise<EsopAnalytics
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await fetch(`${API_BASE_URL}/analytics/compute`, {
+    const response = await authorizedFetch(`${API_BASE_URL}/analytics/compute`, {
       method: 'POST',
       body: formData,
-      credentials: 'include' // Include cookies for auth if needed
     });
 
     const data = await response.json();
@@ -64,9 +64,8 @@ export async function computeAnalyticsFromCsv(file: File): Promise<EsopAnalytics
  */
 export async function computeAnalyticsFromDb(): Promise<EsopAnalyticsResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/analytics/from-db`, {
+    const response = await authorizedFetch(`${API_BASE_URL}/analytics/from-db`, {
       method: 'GET',
-      credentials: 'include', // Include cookies for auth
       headers: {
         'Content-Type': 'application/json'
       }
@@ -113,10 +112,9 @@ export async function validateCsv(file: File): Promise<CsvValidationResponse> {
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await fetch(`${API_BASE_URL}/analytics/validate-csv`, {
+    const response = await authorizedFetch(`${API_BASE_URL}/analytics/validate-csv`, {
       method: 'POST',
       body: formData,
-      credentials: 'include'
     });
 
     const data = await response.json();

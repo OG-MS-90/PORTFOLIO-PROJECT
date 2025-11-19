@@ -6,6 +6,7 @@ import { useEsopData } from '@/contexts/EsopDataContext'
 import { Card, CardContent } from '@/components/ui/card'
 import { Upload, FileUp, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { CSVTemplateDownload } from '@/components/CSVTemplateDownload'
+import { authorizedFetch } from '@/lib/authClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
@@ -28,9 +29,8 @@ export default function EsopUploadPage() {
     formData.append('file', file)
 
     try {
-      const response = await fetch(`${API_BASE_URL}/csv/upload`, {
+      const response = await authorizedFetch(`${API_BASE_URL}/csv/upload`, {
         method: 'POST',
-        credentials: 'include',
         body: formData,
       })
 

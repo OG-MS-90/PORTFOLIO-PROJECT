@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { LiveFinancialPreview } from '@/components/LiveFinancialPreview'
 import { Component as AiLoader } from '@/components/ui/ai-loader'
+import { authorizedFetch } from '@/lib/authClient'
 
 export default function FinancialPlanningPage() {
   const router = useRouter()
@@ -37,10 +38,9 @@ export default function FinancialPlanningPage() {
       localStorage.setItem('financialFormData', JSON.stringify(formData))
       
       const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
-      const response = await fetch(`${API_BASE_URL}/financial/generate-plan`, {
+      const response = await authorizedFetch(`${API_BASE_URL}/financial/generate-plan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify(formData),
       })
 

@@ -5,6 +5,7 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 const { authLimiter } = require("../middleware/security");
 const { requireAuth } = require("../middleware/auth");
+const jwt = require("jsonwebtoken");
 
 // Get frontend URL from environment variable with fallback
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
@@ -14,28 +15,24 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get(
   "/google/callback",
-  (req, res, next) => {
-    console.log("=== Google callback start ===");
-    console.log("Session ID before auth:", req.session?.id);
-    next();
-  },
-  passport.authenticate("google", { failureRedirect: `${FRONTEND_URL}/login`, session: true }),
-  (req, res, next) => {
-    console.log("=== Google callback after passport ===");
-    console.log("Session ID:", req.session?.id);
-    console.log("Session passport:", req.session?.passport);
-    console.log("isAuthenticated():", req.isAuthenticated?.());
-    console.log("User:", req.user);
+  passport.authenticate("google", { failureRedirect: `${FRONTEND_URL}/login`, session: false }),
+  (req, res) => {
+    const user = req.user;
+    if (!user) {
+      return res.redirect(`${FRONTEND_URL}/login?error=no_user`);
+    }
 
-    // Explicitly save the session before redirecting
-    req.session.save((err) => {
-      if (err) {
-        console.error("Error saving session (Google):", err);
-        return res.redirect(`${FRONTEND_URL}/login?error=session`);
-      }
-      console.log("Session saved successfully, redirecting to frontend");
-      res.redirect(`${FRONTEND_URL}/dashboard`);
-    });
+    const payload = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      authProvider: "google",
+    };
+
+    const secret = process.env.JWT_SECRET || "insecure_jwt_secret";
+    const token = jwt.sign(payload, secret, { expiresIn: "1d" });
+    const redirectUrl = `${FRONTEND_URL}/auth/callback?token=${encodeURIComponent(token)}`;
+    res.redirect(redirectUrl);
   }
 );
 
@@ -44,28 +41,24 @@ router.get("/github", passport.authenticate("github", { scope: ["user:email"] })
 
 router.get(
   "/github/callback",
-  (req, res, next) => {
-    console.log("=== GitHub callback start ===");
-    console.log("Session ID before auth:", req.session?.id);
-    next();
-  },
-  passport.authenticate("github", { failureRedirect: `${FRONTEND_URL}/login`, session: true }),
-  (req, res, next) => {
-    console.log("=== GitHub callback after passport ===");
-    console.log("Session ID:", req.session?.id);
-    console.log("Session passport:", req.session?.passport);
-    console.log("isAuthenticated():", req.isAuthenticated?.());
-    console.log("User:", req.user);
+  passport.authenticate("github", { failureRedirect: `${FRONTEND_URL}/login`, session: false }),
+  (req, res) => {
+    const user = req.user;
+    if (!user) {
+      return res.redirect(`${FRONTEND_URL}/login?error=no_user`);
+    }
 
-    // Explicitly save the session before redirecting
-    req.session.save((err) => {
-      if (err) {
-        console.error("Error saving session (GitHub):", err);
-        return res.redirect(`${FRONTEND_URL}/login?error=session`);
-      }
-      console.log("Session saved successfully, redirecting to frontend");
-      res.redirect(`${FRONTEND_URL}/dashboard`);
-    });
+    const payload = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      authProvider: "github",
+    };
+
+    const secret = process.env.JWT_SECRET || "insecure_jwt_secret";
+    const token = jwt.sign(payload, secret, { expiresIn: "1d" });
+    const redirectUrl = `${FRONTEND_URL}/auth/callback?token=${encodeURIComponent(token)}`;
+    res.redirect(redirectUrl);
   }
 );
 

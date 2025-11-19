@@ -2,7 +2,7 @@
 const { AuthenticationError, AuthorizationError } = require('../utils/errors');
 
 const requireAuth = (req, res, next) => {
-  if (!req.isAuthenticated() || !req.user) {
+  if (!req.user) {
     throw new AuthenticationError('Please log in to access this resource');
   }
   next();

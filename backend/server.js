@@ -8,6 +8,7 @@ const passport = require("passport");
 const morgan = require("morgan");
 const { securityHeaders, generalLimiter } = require('./middleware/security');
 const { sanitizeInput } = require('./middleware/auth');
+const jwtAuth = require("./middleware/jwtAuth");
 const connectDB = require("./config/db");
 const routes = require("./routes");
 const reportRoutes = require("./routes/reportRoutes");
@@ -148,6 +149,9 @@ app.use((req, res, next) => {
   
   next();
 });
+
+// JWT auth middleware (token-based auth using Authorization header)
+app.use(jwtAuth);
 
 // 6) Setup ApolloServer for GraphQL
 async function startApolloServer() {

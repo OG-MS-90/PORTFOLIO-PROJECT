@@ -1,14 +1,14 @@
 import { FinancialFormData, FinancialPlan, EsopRealtimeAnalyticsResponse } from '@/types/esop'
+import { authorizedFetch } from '@/lib/authClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
 export async function generateFinancialPlan(formData: FinancialFormData): Promise<FinancialPlan> {
-  const response = await fetch(`${API_BASE_URL}/financial/generate-plan`, {
+  const response = await authorizedFetch(`${API_BASE_URL}/financial/generate-plan`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify(formData),
   })
 
@@ -26,12 +26,11 @@ export async function getFinancialPreview(data: {
   riskTolerance: string
   planningRegion: string
 }) {
-  const response = await fetch(`${API_BASE_URL}/financial/preview`, {
+  const response = await authorizedFetch(`${API_BASE_URL}/financial/preview`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify(data),
   })
 
@@ -44,10 +43,7 @@ export async function getFinancialPreview(data: {
 
 export async function getEsopRealtimeAnalytics(region?: 'india' | 'us'): Promise<EsopRealtimeAnalyticsResponse> {
   const params = region ? `?region=${encodeURIComponent(region)}` : ''
-  const response = await fetch(`${API_BASE_URL}/financial/esop-analytics${params}`, {
-    method: 'GET',
-    credentials: 'include',
-  })
+  const response = await authorizedFetch(`${API_BASE_URL}/financial/esop-analytics${params}`)
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}))

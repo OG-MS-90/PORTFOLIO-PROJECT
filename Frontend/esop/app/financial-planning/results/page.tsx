@@ -36,6 +36,7 @@ import {
 import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { authorizedFetch } from '@/lib/authClient';
 
 // --- Interfaces ---
 interface StoredPlan {
@@ -257,12 +258,11 @@ export default function FinancialPlanningResultsPage() {
     if (!userEmail) return;
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/reports/email`, {
+      const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/reports/email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({
           email: userEmail,
           planId: plan?.wealthManagerId,
@@ -285,10 +285,9 @@ export default function FinancialPlanningResultsPage() {
 
   const handleSavePlan = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/reports/save`, {
+      const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/reports/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({
           planId: plan?.wealthManagerId,
           planData: planData
