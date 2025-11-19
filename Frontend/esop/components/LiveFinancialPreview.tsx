@@ -187,7 +187,7 @@ export function LiveFinancialPreview({
                 Projected Return
              </div>
              <div className="flex flex-col items-center justify-center py-2">
-                <span className="text-4xl font-bold text-green-500 tracking-tight">{preview.expectedCagr}%</span>
+                <span className="text-4xl font-bold text-green-500 tracking-tight">{preview.expectedCagr.toFixed(1)}%</span>
                 <span className="text-[10px] uppercase text-muted-foreground font-semibold mt-1">Annual CAGR</span>
              </div>
              <div className="pt-3 border-t border-dashed">
