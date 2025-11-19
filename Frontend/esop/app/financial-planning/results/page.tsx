@@ -219,7 +219,7 @@ export default function FinancialPlanningResultsPage() {
     return planData.allocation.map((item: any) => ({
       name: item.name,
       value: item.value,
-      color: item.name === 'Equities' ? '#3b82f6' : item.name === 'Bonds' ? '#10b981' : '#f59e0b'
+      color: item.name === 'Equities' ? '#3b82f6' : item.name === 'Bonds' ? '#10b981' : item.name === 'Alternatives' ? '#f59e0b' : '#a855f7'
     }));
   }, [planData]);
 
@@ -676,11 +676,14 @@ export default function FinancialPlanningResultsPage() {
                                     </div>
                                     <div className="space-y-2">
                                        {category.items?.slice(0, 3).map((item: any) => (
-                                          <div key={item.symbol} className="flex justify-between text-sm">
+                                          <div key={item.symbol} className="flex justify-between items-center text-sm">
                                              <span>{item.symbol}</span>
-                                             <span className={item.return1y >= 0 ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
-                                                {item.return1y > 0 ? '+' : ''}{item.return1y}%
-                                             </span>
+                                             <div className="flex items-center gap-1.5">
+                                                <span className={item.return1y >= 0 ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
+                                                   {item.return1y > 0 ? '+' : ''}{item.return1y}%
+                                                </span>
+                                                <span className="text-[10px] text-muted-foreground font-medium">1Y</span>
+                                             </div>
                                           </div>
                                        ))}
                                     </div>

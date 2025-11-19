@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate, formatPercent } from '@/lib/utils'
 import { TrendingUp, Upload, BarChart3, RefreshCw, DollarSign, Activity, Calendar, PieChart, Search, CheckCircle2, Clock, XCircle, Circle } from 'lucide-react'
 import Link from 'next/link'
+import { SidebarNav } from '@/components/ui/sidebar-nav'
 import {
   LineChart,
   Line,
@@ -175,15 +176,17 @@ export default function DashboardPage() {
 
   if (userLoading || !user) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0a0a0e]">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0e]">
-      <div className="container mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="flex min-h-screen bg-[#0a0a0e]">
+      <SidebarNav />
+      <div className="flex-1 pl-16 lg:pl-64 transition-all duration-300">
+        <div className="container mx-auto px-4 sm:px-6 py-8 space-y-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-white tracking-tight">ESOP Dashboard</h1>
             <p className="text-gray-500 text-sm mt-1">View and manage your equity grants</p>
