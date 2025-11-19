@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { LiveFinancialPreview } from '@/components/LiveFinancialPreview'
-import { Component as AiLoader } from '@/components/ui/ai-loader'
 import { authorizedFetch } from '@/lib/authClient'
 
 export default function FinancialPlanningPage() {
@@ -60,16 +59,42 @@ export default function FinancialPlanningPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-20 flex flex-col items-center text-center gap-6">
-          <AiLoader />
-          <div>
-            <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground">Generating Plan</p>
-            <h1 className="text-3xl font-semibold mt-3">Preparing your financial roadmap…</h1>
-            <p className="text-muted-foreground mt-2 max-w-xl">
-              We&apos;re loading your ESOP positions, pulling live market benchmarks, and asking the planner to
-              stitch everything into a detailed report. This can take a few seconds on the first run.
+      <div className="min-h-screen bg-gradient-to-b from-background via-background to-slate-50 dark:to-slate-950 flex items-center justify-center">
+        <div className="container mx-auto px-4 flex flex-col items-center text-center gap-8 max-w-2xl">
+          {/* Modern spinner with glow effect */}
+          <div className="relative">
+            <div className="w-20 h-20 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+            <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-amber-500/50 rounded-full animate-spin" style={{ animationDuration: '1.5s', animationDirection: 'reverse' }} />
+          </div>
+          
+          {/* Text content */}
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <p className="text-sm font-medium text-primary">Generating Plan</p>
+            </div>
+            
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Preparing your financial roadmap
+            </h1>
+            
+            <p className="text-base text-muted-foreground leading-relaxed max-w-lg mx-auto">
+              We&apos;re analyzing your ESOP positions, pulling live market benchmarks, and creating 
+              a personalized strategy. This usually takes 10-15 seconds.
             </p>
+
+            {/* Progress indicator */}
+            <div className="flex items-center justify-center gap-2 mt-6">
+              <div className="flex gap-1.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-2 h-2 rounded-full bg-primary/30 animate-pulse"
+                    style={{ animationDelay: `${i * 0.15}s` }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
