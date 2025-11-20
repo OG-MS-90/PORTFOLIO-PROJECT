@@ -806,7 +806,11 @@ export default function FinancialPlanningResultsPage() {
                               type="number" 
                               className="flex-1 p-2 outline-none bg-transparent"
                               value={esopQuantity}
-                              onChange={(e) => setEsopQuantity(Number(e.target.value))}
+                              onChange={(e) => {
+                                const raw = e.target.value;
+                                const cleaned = raw.replace(/^0+(?=\d)/, '');
+                                setEsopQuantity(Number(cleaned || '0'));
+                              }}
                            />
                         </div>
                      </div>
@@ -834,7 +838,11 @@ export default function FinancialPlanningResultsPage() {
                               type="number" 
                               className="flex-1 p-2 outline-none bg-transparent"
                               value={expectedReturn}
-                              onChange={(e) => setExpectedReturn(Number(e.target.value))}
+                              onChange={(e) => {
+                                const raw = e.target.value;
+                                const cleaned = raw.replace(/^0+(?=\d)/, '');
+                                setExpectedReturn(Number(cleaned || '0'));
+                              }}
                            />
                            <span className="px-3 py-2 bg-muted text-muted-foreground border-l">%</span>
                         </div>
