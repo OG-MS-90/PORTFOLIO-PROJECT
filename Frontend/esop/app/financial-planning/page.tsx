@@ -103,13 +103,13 @@ export default function FinancialPlanningPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0e]">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-10">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8 sm:space-y-10">
         <div className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 text-white">Financial Planning</h1>
           <p className="text-muted-foreground text-base">Create a personalized investment strategy based on your goals and risk tolerance</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
+        <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 items-start max-w-6xl mx-auto">
           <div>
             <Card className="shadow-xl">
               <CardHeader>
@@ -124,7 +124,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.monthlyIncome}
-                      onChange={(e) => setFormData({...formData, monthlyIncome: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          monthlyIncome: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -134,7 +141,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.monthlyExpenses}
-                      onChange={(e) => setFormData({...formData, monthlyExpenses: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          monthlyExpenses: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -147,7 +161,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.savingsGoal}
-                      onChange={(e) => setFormData({...formData, savingsGoal: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          savingsGoal: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -157,7 +178,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.investmentHorizon}
-                      onChange={(e) => setFormData({...formData, investmentHorizon: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          investmentHorizon: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -170,7 +198,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.currentAge}
-                      onChange={(e) => setFormData({...formData, currentAge: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          currentAge: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -180,7 +215,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.retirementAge}
-                      onChange={(e) => setFormData({...formData, retirementAge: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          retirementAge: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -218,7 +260,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.monthlyContribution}
-                      onChange={(e) => setFormData({...formData, monthlyContribution: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          monthlyContribution: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
@@ -228,7 +277,14 @@ export default function FinancialPlanningPage() {
                     <input
                       type="number"
                       value={formData.emergencyFundMonths}
-                      onChange={(e) => setFormData({...formData, emergencyFundMonths: Number(e.target.value)})}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        setFormData({
+                          ...formData,
+                          emergencyFundMonths: Number(cleaned || '0'),
+                        });
+                      }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
                     />
