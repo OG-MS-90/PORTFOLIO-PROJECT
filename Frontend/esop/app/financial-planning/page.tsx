@@ -7,18 +7,31 @@ import { Button } from '@/components/ui/button'
 import { LiveFinancialPreview } from '@/components/LiveFinancialPreview'
 import { authorizedFetch } from '@/lib/authClient'
 
+type FinancialFormState = {
+  monthlyIncome: number | ''
+  monthlyExpenses: number | ''
+  savingsGoal: number | ''
+  investmentHorizon: number | ''
+  currentAge: number | ''
+  retirementAge: number | ''
+  planningRegion: 'us' | 'india'
+  riskTolerance: 'low' | 'medium' | 'high'
+  monthlyContribution: number | ''
+  emergencyFundMonths: number | ''
+}
+
 export default function FinancialPlanningPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FinancialFormState>({
     monthlyIncome: 10000,
     monthlyExpenses: 6000,
     savingsGoal: 100000,
     investmentHorizon: 10,
     currentAge: 30,
     retirementAge: 60,
-    planningRegion: 'us' as 'us' | 'india',
-    riskTolerance: 'medium' as 'low' | 'medium' | 'high',
+    planningRegion: 'us',
+    riskTolerance: 'medium',
     monthlyContribution: 1000,
     emergencyFundMonths: 6,
   })
@@ -34,13 +47,25 @@ export default function FinancialPlanningPage() {
     setLoading(true)
 
     try {
-      localStorage.setItem('financialFormData', JSON.stringify(formData))
+      const payload = {
+        ...formData,
+        monthlyIncome: Number(formData.monthlyIncome || 0),
+        monthlyExpenses: Number(formData.monthlyExpenses || 0),
+        savingsGoal: Number(formData.savingsGoal || 0),
+        investmentHorizon: Number(formData.investmentHorizon || 0),
+        currentAge: Number(formData.currentAge || 0),
+        retirementAge: Number(formData.retirementAge || 0),
+        monthlyContribution: Number(formData.monthlyContribution || 0),
+        emergencyFundMonths: Number(formData.emergencyFundMonths || 0),
+      }
+
+      localStorage.setItem('financialFormData', JSON.stringify(payload))
       
       const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
       const response = await authorizedFetch(`${API_BASE_URL}/financial/generate-plan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) throw new Error('Plan generation failed')
@@ -125,12 +150,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.monthlyIncome}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            monthlyIncome: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          monthlyIncome: Number(cleaned || '0'),
-                        });
+                          monthlyIncome: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -142,12 +174,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.monthlyExpenses}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            monthlyExpenses: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          monthlyExpenses: Number(cleaned || '0'),
-                        });
+                          monthlyExpenses: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -162,12 +201,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.savingsGoal}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            savingsGoal: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          savingsGoal: Number(cleaned || '0'),
-                        });
+                          savingsGoal: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -179,12 +225,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.investmentHorizon}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            investmentHorizon: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          investmentHorizon: Number(cleaned || '0'),
-                        });
+                          investmentHorizon: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -199,12 +252,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.currentAge}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            currentAge: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          currentAge: Number(cleaned || '0'),
-                        });
+                          currentAge: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -216,12 +276,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.retirementAge}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            retirementAge: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          retirementAge: Number(cleaned || '0'),
-                        });
+                          retirementAge: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -261,12 +328,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.monthlyContribution}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            monthlyContribution: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          monthlyContribution: Number(cleaned || '0'),
-                        });
+                          monthlyContribution: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -278,12 +352,19 @@ export default function FinancialPlanningPage() {
                       type="number"
                       value={formData.emergencyFundMonths}
                       onChange={(e) => {
-                        const raw = e.target.value;
-                        const cleaned = raw.replace(/^0+(?=\d)/, '');
+                        const raw = e.target.value
+                        if (raw === '') {
+                          setFormData({
+                            ...formData,
+                            emergencyFundMonths: '',
+                          })
+                          return
+                        }
+                        const cleaned = raw.replace(/^0+(?=\d)/, '')
                         setFormData({
                           ...formData,
-                          emergencyFundMonths: Number(cleaned || '0'),
-                        });
+                          emergencyFundMonths: Number(cleaned),
+                        })
                       }}
                       className="w-full p-3 rounded-lg border bg-background text-base"
                       required
@@ -301,8 +382,8 @@ export default function FinancialPlanningPage() {
 
           <div>
             <LiveFinancialPreview
-              monthlyIncome={formData.monthlyIncome}
-              monthlyExpenses={formData.monthlyExpenses}
+              monthlyIncome={Number(formData.monthlyIncome || 0)}
+              monthlyExpenses={Number(formData.monthlyExpenses || 0)}
               riskTolerance={formData.riskTolerance}
               planningRegion={formData.planningRegion}
             />
