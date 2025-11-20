@@ -21,7 +21,15 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
       {shouldShowSidebar && (
         <SidebarNav collapsed={collapsed} setCollapsed={setCollapsed} />
       )}
-      <div className={shouldShowSidebar ? (collapsed ? 'md:ml-16' : 'md:ml-64') : ''}>
+      <div
+        className={
+          shouldShowSidebar
+            ? collapsed
+              ? 'pb-16 md:pb-0 md:ml-16'
+              : 'pb-16 md:pb-0 md:ml-64'
+            : ''
+        }
+      >
         {children}
       </div>
     </>

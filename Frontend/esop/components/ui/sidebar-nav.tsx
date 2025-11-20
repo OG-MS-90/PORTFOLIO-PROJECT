@@ -163,6 +163,35 @@ export function SidebarNav({ collapsed, setCollapsed }: SidebarNavProps) {
           )}
         </div>
       </div>
+
+      {/* Mobile bottom navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-neutral-800 bg-[#020308]/95 backdrop-blur md:hidden">
+        <div className="flex items-stretch justify-around h-14">
+          {navigation.map((item) => {
+            const isActive = pathname === item.href
+            const Icon = item.icon
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "flex flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium",
+                  isActive ? "text-yellow-400" : "text-gray-400 hover:text-gray-200"
+                )}
+              >
+                <Icon
+                  className={cn(
+                    "h-5 w-5",
+                    isActive ? "text-yellow-400" : "text-gray-500"
+                  )}
+                />
+                <span className="truncate max-w-[90px]">{item.name}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
     </>
   )
 }
